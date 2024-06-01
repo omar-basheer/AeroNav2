@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CsvParser {
+public class CsvParser{
 
-  public static HashMap<String, Airport> parseAirports(String fliename) {
+  public static HashMap<ArrayList<String>, Airport> parseAirports(String fliename) {
     Scanner inputStream;
     String streamline;
     String[] splitStream;
-    HashMap<String, Airport> airports = new HashMap<String, Airport>();
+    HashMap<ArrayList<String>, Airport> airports = new HashMap<ArrayList<String>, Airport>();
 
     try {
       inputStream = new Scanner(new FileInputStream(fliename));
@@ -19,8 +19,11 @@ public class CsvParser {
         splitStream = streamline.split(",");
 
         if (!(splitStream[4] == "\\N")) {
-          // use iata as key for hashmap
-          String key = splitStream[4];
+          // use iata + city + country as key for hashmap
+          ArrayList<String> key = new ArrayList<String>();
+          key.add(splitStream[4]);
+          key.add(splitStream[2]);
+          key.add(splitStream[3]);
           airports.putIfAbsent(key, new Airport(splitStream[1], splitStream[2], splitStream[3], splitStream[4],
               splitStream[5], splitStream[6], splitStream[7], splitStream[9]));
         }
@@ -33,12 +36,6 @@ public class CsvParser {
       return null;
     }
     return airports;
-  }
-
-  public static void printAirports(HashMap<String, Airport> airports) {
-    for (String key : airports.keySet()) {
-      System.out.println(airports.get(key).getName());
-    }
   }
 
   public static HashMap<String, Airline> parseAirlines(String filename) {
@@ -67,12 +64,6 @@ public class CsvParser {
       return null;
     }
     return airlines;
-  }
-
-  public static void printAirlines(HashMap<String, Airline> airlines) {
-    for (String key : airlines.keySet()) {
-      System.out.println(airlines.get(key).getName());
-    }
   }
 
 
@@ -116,6 +107,21 @@ public class CsvParser {
     return new RouteData(flightGraph, routes);
   }
 
+  public static void printAirports(HashMap<ArrayList<String>, Airport> airports) {
+    for (ArrayList<String> key : airports.keySet()) {
+      System.out.println(airports.get(key).getName().toString());
+      // System.out.println(key.toString() + " -> " + airports.get(key).toString());
+      // System.out.println(airports.get(key).toString());
+    }
+  }
+
+  public static void printAirlines(HashMap<String, Airline> airlines) {
+    for (String key : airlines.keySet()) {
+      // System.out.println(airlines.get(key).getName().toString());
+      System.out.println(airlines.get(key).toString());
+    }
+  }
+
   public static void printRoutes(RouteData routeData){
     for(ArrayList<String> key : routeData.getRoutes().keySet()){
       System.out.println(routeData.getRoutes().get(key).toString());
@@ -124,13 +130,13 @@ public class CsvParser {
 
   public static void printFlightGraph(RouteData routeData){
     for(String key : routeData.getFlightGraph().keySet()){
-      System.out.println(key + " -> " + routeData.getFlightGraph().get(key));
+      System.out.println(key + " -> " + routeData.getFlightGraph().get(key).toString());
     }
   }
   
 
   public static void main(String[] args) {
-    HashMap<String, Airport> airports = parseAirports("files/airports.csv");
+    HashMap<ArrayList<String>, Airport> airports = parseAirports("files/airports.csv");
     printAirports(airports);
 
     HashMap<String, Airline> airlines = parseAirlines("files/airlines.csv");
@@ -138,7 +144,7 @@ public class CsvParser {
 
     RouteData routeData = parseRoutes("files/routes.csv");
     printRoutes(routeData);
-    printFlightGraph(routeData);
+    // printFlightGraph(routeData);
   }
 
 }

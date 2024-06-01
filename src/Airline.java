@@ -27,4 +27,9 @@ public class Airline {
     return this.active;
   }
 
+  @Override
+  public String toString() {
+    return "Airline: " + this.name + " (" + this.icao + ")";
+  }
+
 }

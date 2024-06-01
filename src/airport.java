@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-
 public class Airport {
   private String name;
   private String city;
@@ -58,7 +54,7 @@ public class Airport {
 
   @Override
   public String toString() {
-    return "Airport: " + this.name + " (" + this.iata + ")";
+    return "Airport: " + this.name + " (" + this.iata + ")" + " (" + this.icao + ")";
   }
 
 }
