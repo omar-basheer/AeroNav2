@@ -4,11 +4,11 @@ public class Airport {
   private String country;
   private String iata;
   private String icao;
-  private String latitude;
-  private String longitude;
+  private double latitude;
+  private double longitude;
   private String timezone;
 
-  public Airport(String name, String city, String country, String iata, String icao, String latitude, String longitude,
+  public Airport(String name, String city, String country, String iata, String icao, double latitude, double longitude,
       String timezone) {
     this.name = name;
     this.city = city;
@@ -40,11 +40,11 @@ public class Airport {
     return this.icao;
   }
 
-  public String getLatitude() {
+  public double getLatitude() {
     return this.latitude;
   }
 
-  public String getLongitude() {
+  public double getLongitude() {
     return this.longitude;
   }
 

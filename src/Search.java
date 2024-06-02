@@ -56,17 +56,45 @@ public class Search {
 
   }
 
-  public static ArrayList<String> findShortestPath(String source, String destination,
-      HashMap<String, ArrayList<String>> flightGraph) {
-    ArrayList<ArrayList<String>> allPaths = findAllPaths(source, destination, flightGraph, 5, 10);
-    ArrayList<String> shortestPath = allPaths.get(0);
+  public static void findShortestPath(ArrayList<ArrayList<String>> foundPaths) {
+    ArrayList<String> shortestPath = foundPaths.get(0);
 
-    for (ArrayList<String> path : allPaths) {
+    for (ArrayList<String> path : foundPaths) {
       if (path.size() < shortestPath.size()) {
         shortestPath = path;
       }
     }
-    return shortestPath;
+    System.out.println("Shortest Path: " + shortestPath.toString());
+  }
+
+  public static void findShortestFlight(ArrayList<ArrayList<String>> foundPaths, HashMap<String, Airport> airports){
+    ArrayList<String> shortestFlight = foundPaths.get(0);
+    double flightDistance = Double.NEGATIVE_INFINITY;
+
+    for(ArrayList<String> path: foundPaths){
+      double distance = 0;
+      for (int i = 0; i < path.size()-1; i++){
+        String curr = path.get(i);
+        String next = path.get(i+1);
+
+        double lat1 = airports.get(curr).getLatitude();
+        double lon1 = airports.get(curr).getLongitude();
+        double lat2 = airports.get(next).getLatitude();
+        double lon2 = airports.get(next).getLongitude();
+
+        distance += Haversine.calculateHaversine(lat1, lon1, lat2, lon2);
+      }
+
+      System.out.println("Path: " + path.toString());
+      System.out.println("Distance: " + distance);
+
+      if (distance > flightDistance){
+        flightDistance = distance;
+        shortestFlight = path;
+      }
+    }
+    System.out.println("Shortest Flight Distance: " + flightDistance);
+    System.out.println("Shortest Flight Path: " + shortestFlight.toString());
   }
 
   public static void printAllPaths(ArrayList<ArrayList<String>> allPaths) {
