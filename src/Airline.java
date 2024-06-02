@@ -1,12 +1,12 @@
 public class Airline {
   private String name;
-  private String icao;
+  private String iata;
   private String country;
   private String active;
 
-  public Airline(String name, String icao, String country, String active) {
+  public Airline(String name, String iata, String country, String active) {
     this.name = name;
-    this.icao = icao;
+    this.iata = iata;
     this.country = country;
     this.active = active;
   }
@@ -15,8 +15,8 @@ public class Airline {
     return this.name;
   }
 
-  public String getIcao() {
-    return this.icao;
+  public String getIata() {
+    return this.iata;
   }
 
   public String getCountry() {
@@ -29,7 +29,7 @@ public class Airline {
 
   @Override
   public String toString() {
-    return "Airline: " + this.name + " (" + this.icao + ")";
+    return "Airline: " + this.name + " (" + this.iata + ")";
   }
 
 }

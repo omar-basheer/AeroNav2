@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class RouteData {
     private HashMap<String, ArrayList<String>> flightGraph;
   private HashMap<ArrayList<String>, Route> routes;

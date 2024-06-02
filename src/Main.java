@@ -3,29 +3,34 @@ import java.util.HashMap;
 
 public class Main {
 
-    @SuppressWarnings("unused")
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-    AirportData airports = CsvParser.parseAirports("files/airports.csv");
-    // CsvParser.printAirports(airports);
-    // CsvParser.printCityRoutes(airports);
+    // Load airport data
+    AirportData airports = Parser.parseAirports("files/airports.csv");
+    // Parser.printAirports(airports);
+    // Parser.printCityAirports(airports);
 
-    HashMap<String, Airline> airlines = CsvParser.parseAirlines("files/airlines.csv");
-    // CsvParser.printAirlines(airlines);
+    // Load airline data
+    HashMap<String, Airline> airlines = Parser.parseAirlines("files/airlines.csv");
+    // Parser.printAirlines(airlines);
 
-    RouteData routeData = CsvParser.parseRoutes("files/routes.csv");
-    // CsvParser.printRoutes(routeData);
-    // CsvParser.printFlightGraph(routeData);
+    // Load route data
+    RouteData routeData = Parser.parseRoutes("files/routes.csv");
+    // Parser.printRoutes(routeData);
+    // Parser.printFlightGraph(routeData);
 
-    // ArrayList<ArrayList<String>> flightPaths = Search.findAllPaths("FRE", "CMU", routeData.getFlightGraph(), 5, 10);
-    ArrayList<ArrayList<String>> flightPaths = Search.findAllPaths("ACC", "SFO", routeData.getFlightGraph(), 5, 15);
-    // ArrayList<ArrayList<String>> flightPaths = Search.findAllPaths("ACC", "JFK", routeData.getFlightGraph(), 5, 10);
-    // ArrayList<ArrayList<String>> flightPaths = Search.findAllPaths("ADD", "JED", routeData.getFlightGraph());
-    Search.printAllPaths(flightPaths);
-    Search.findShortestPath(flightPaths);
-    Search.findShortestFlight(flightPaths, airports.getAirports());
+    // Read input file
+    ArrayList<String> inputs = Parser.parseInputFile("tests/input.txt", airports.getCityAirports());
+
+    // Find all paths
+    ArrayList<ArrayList<String>> flightPaths = Search.findAllPaths(inputs.get(0), inputs.get(1),
+        routeData.getFlightGraph(), 14, 2);
+
   
-    
+    ArrayList<PathData> formattedPaths = Search.formatPaths(flightPaths, airports.getAirports(), routeData.getRoutes(), airlines);
+
+    // Write output file
+    Parser.parseOutputFile(formattedPaths, "tests/output.txt");
   }
-  
+
 }

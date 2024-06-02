@@ -1,10 +1,12 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CsvParser {
+public class Parser {
 
   public static AirportData parseAirports(String fliename) {
     Scanner inputStream;
@@ -41,16 +43,16 @@ public class CsvParser {
 
             // use city + country as key for hashmap
             ArrayList<String> cityKey = new ArrayList<String>();
-            cityKey.add(splitStream[2]);
-            cityKey.add(splitStream[3]);
+            cityKey.add(splitStream[2].toLowerCase());
+            cityKey.add(splitStream[3].toLowerCase());
             cityAirports.putIfAbsent(cityKey, splitStream[4]);
 
           } catch (NumberFormatException e) {
             // System.err.println("Error parsing float values for line: " + streamline);
             // System.err.println(
-            //   "Latitude: " + splitStream[6] + 
-            //   ", Longitude: " + splitStream[7]
-            //   );
+            // "Latitude: " + splitStream[6] +
+            // ", Longitude: " + splitStream[7]
+            // );
           }
 
         }
@@ -77,10 +79,15 @@ public class CsvParser {
         streamline = inputStream.nextLine();
         splitStream = streamline.split(",");
 
-        if (!(splitStream[7].equals("N"))) {
-          // use icao as key for hashmap
-          String key = splitStream[4];
-          airlines.putIfAbsent(key, new Airline(splitStream[1], splitStream[4], splitStream[6], splitStream[7]));
+        if (!splitStream[7].equals("N") && !splitStream[3].equals("")) {
+          // use iata as key for hashmap
+          String key = splitStream[3];
+          airlines.putIfAbsent(key, new Airline(
+              splitStream[1], // name
+              splitStream[3], // iata
+              splitStream[6], // country
+              splitStream[7] // active
+          ));
         }
       }
       inputStream.close();
@@ -117,11 +124,18 @@ public class CsvParser {
 
         // add route to routes
         ArrayList<String> key = new ArrayList<String>();
-        key.add(splitStream[2]);
-        key.add(splitStream[4]);
+        key.add(splitStream[2]); // source airport iata
+        key.add(splitStream[4]); // destination airport iata
 
-        routes.putIfAbsent(key, new Route(splitStream[0], splitStream[1], splitStream[2], splitStream[3],
-            splitStream[4], splitStream[5], splitStream[7]));
+        routes.putIfAbsent(key, new Route(
+            splitStream[0], // airline code
+            splitStream[1], // airline id
+            splitStream[2], // source airport iata
+            splitStream[3], // source airport id
+            splitStream[4], // destination airport iata
+            splitStream[5], // destination airport id
+            splitStream[7] // stops
+        ));
       }
       inputStream.close();
       System.out.println("Routes loaded");
@@ -140,7 +154,7 @@ public class CsvParser {
     }
   }
 
-  public static void printCityRoutes(AirportData airportData) {
+  public static void printCityAirports(AirportData airportData) {
     for (ArrayList<String> key : airportData.getCityAirports().keySet()) {
       System.out.println(airportData.getCityAirports().get(key).toString());
     }
@@ -165,16 +179,72 @@ public class CsvParser {
     }
   }
 
-  public static void main(String[] args) {
-    AirportData airports = parseAirports("files/airports.csv");
-    printAirports(airports);
+  public static ArrayList<String> parseInputFile(String filename, HashMap<ArrayList<String>, String> cityAirports) {
+    Scanner inputStream;
+    String streamline;
+    String[] splitStream;
+    ArrayList<String> inputs = new ArrayList<String>();
 
-    HashMap<String, Airline> airlines = parseAirlines("files/airlines.csv");
-    printAirlines(airlines);
+    try {
+      inputStream = new Scanner(new FileInputStream(filename));
+      while (inputStream.hasNext()) {
+        streamline = inputStream.nextLine();
+        splitStream = streamline.split(", ");
+        ArrayList<String> params = new ArrayList<String>();
+        for (String param : splitStream) {
+          params.add(param.toLowerCase());
+        }
+        if (cityAirports.containsKey(params)) {
+          inputs.add(cityAirports.get(params).toString());
+        } else {
+          System.out.println("Invalid input: " + params.toString());
+          break;
+        }
+      }
+      inputStream.close();
+      System.out.println("Inputs loaded: " + inputs.toString());
 
-    RouteData routeData = parseRoutes("files/routes.csv");
-    printRoutes(routeData);
-    // printFlightGraph(routeData);
+    } catch (FileNotFoundException e) {
+      System.out.println("File not found");
+      return null;
+    }
+
+    return inputs;
+  }
+
+  public static void parseOutputFile(ArrayList<PathData> pathsWithDistances,
+      String filename) {
+    try (FileWriter writer = new FileWriter(filename)) {
+
+      PathData shortestPath = pathsWithDistances.get(0);
+      for (PathData pwd : pathsWithDistances) {
+        if (pwd.distance < shortestPath.distance) {
+          shortestPath = pwd;
+        }
+      }
+      // write the shortest path
+      writer.write("Shortest Path:\n");
+      for (int i = 0; i < shortestPath.path.size() - 1; i++) {
+        writer.write((i + 1) + ". " + shortestPath.airlines.get(i) + " from " + shortestPath.path.get(i) + " to "
+            + shortestPath.path.get(i + 1) + "\n");
+      }
+      writer.write("Total flights: " + (shortestPath.path.size() - 1) + "\n");
+      writer.write("Total flight distance: " + shortestPath.distance + " kilometers\n\n");
+
+      // write all paths with distance information
+      writer.write("All Paths with Distance Information:\n");
+      for (PathData pwd : pathsWithDistances) {
+        writer.write("Path:\n");
+        for (int i = 0; i < pwd.path.size() - 1; i++) {
+          writer.write(
+              (i + 1) + ". " + pwd.airlines.get(i) + " from " + pwd.path.get(i) + " to " + pwd.path.get(i + 1) + "\n");
+        }
+        writer.write("Total flights: " + (pwd.path.size() - 1) + "\n");
+        writer.write("Total flight distance: " + pwd.distance + " kilometers\n\n");
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

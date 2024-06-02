@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class AirportData {
 
   private HashMap<String, Airport> airports;
