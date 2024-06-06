@@ -6,8 +6,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * The Parser class is responsible for parsing data from input files and
+ * creating data structures
+ * to store the parsed information. It provides methods to parse airports,
+ * airlines, and routes,
+ * as well as methods to print the parsed data.
+ */
 public class Parser {
 
+  /**
+   * Parses the airports from a given file.
+   * 
+   * @param filename The name of the file to parse.
+   * @return An AirportData object containing the parsed airports.
+   */
   public static AirportData parseAirports(String fliename) {
     Scanner inputStream;
     String streamline;
@@ -67,6 +80,12 @@ public class Parser {
     return new AirportData(airports, cityAirports);
   }
 
+  /**
+   * Parses the airlines from a given file.
+   * 
+   * @param filename The name of the file to parse.
+   * @return A HashMap containing the parsed airlines.
+   */
   public static HashMap<String, Airline> parseAirlines(String filename) {
     Scanner inputStream;
     String streamline;
@@ -100,6 +119,12 @@ public class Parser {
     return airlines;
   }
 
+  /**
+   * Parses the routes from a given file.
+   * 
+   * @param filename The name of the file to parse.
+   * @return A RouteData object containing the parsed routes.
+   */
   public static RouteData parseRoutes(String filename) {
     Scanner inputStream;
     String streamline;
@@ -146,6 +171,11 @@ public class Parser {
     return new RouteData(flightGraph, routes);
   }
 
+  /**
+   * Prints the parsed airports.
+   * 
+   * @param airportData The AirportData object containing the airports to print.
+   */
   public static void printAirports(AirportData airportData) {
     for (String key : airportData.getAirports().keySet()) {
       System.out.println(airportData.getAirports().get(key).getName().toString());
@@ -154,12 +184,23 @@ public class Parser {
     }
   }
 
+  /**
+   * Prints the parsed city airports.
+   * 
+   * @param airportData The AirportData object containing the city airports to
+   *                    print.
+   */
   public static void printCityAirports(AirportData airportData) {
     for (ArrayList<String> key : airportData.getCityAirports().keySet()) {
       System.out.println(airportData.getCityAirports().get(key).toString());
     }
   }
 
+  /**
+   * Prints the parsed airlines.
+   * 
+   * @param airlines The HashMap containing the airlines to print.
+   */
   public static void printAirlines(HashMap<String, Airline> airlines) {
     for (String key : airlines.keySet()) {
       // System.out.println(airlines.get(key).getName().toString());
@@ -167,18 +208,35 @@ public class Parser {
     }
   }
 
+  /**
+   * Prints the parsed routes.
+   * 
+   * @param routeData The RouteData object containing the routes to print.
+   */
   public static void printRoutes(RouteData routeData) {
     for (ArrayList<String> key : routeData.getRoutes().keySet()) {
       System.out.println(routeData.getRoutes().get(key).toString());
     }
   }
 
+  /**
+   * Prints the flight graph.
+   * 
+   * @param routeData The RouteData object containing the flight graph to print.
+   */
   public static void printFlightGraph(RouteData routeData) {
     for (String key : routeData.getFlightGraph().keySet()) {
       System.out.println(key + " -> " + routeData.getFlightGraph().get(key).toString());
     }
   }
 
+  /**
+   * Parses the input file.
+   * 
+   * @param filename     The name of the file to parse.
+   * @param cityAirports The HashMap containing the city airports.
+   * @return An ArrayList containing the parsed inputs.
+   */
   public static ArrayList<String> parseInputFile(String filename, HashMap<ArrayList<String>, String> cityAirports) {
     Scanner inputStream;
     String streamline;
@@ -212,6 +270,12 @@ public class Parser {
     return inputs;
   }
 
+  /**
+   * Parses the output file.
+   * 
+   * @param pathsWithDistances The ArrayList containing the paths with distances.
+   * @param filename           The name of the file to parse.
+   */
   public static void parseOutputFile(ArrayList<PathData> pathsWithDistances,
       String filename) {
     try (FileWriter writer = new FileWriter(filename)) {

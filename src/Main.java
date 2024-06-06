@@ -1,8 +1,20 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The Main class is the entry point of the Aeronav application.
+ * It loads airport, airline, and route data, reads input from a file,
+ * finds flight paths, formats the paths, and writes the output to a file.
+ */
 public class Main {
 
+  /**
+   * The main method is the entry point of the application.
+   * It loads airport, airline, and route data, reads input from a file,
+   * finds flight paths, formats the paths, and writes the output to a file.
+   *
+   * @param args The command-line arguments.
+   */
   public static void main(String[] args) {
 
     // Load airport data

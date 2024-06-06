@@ -1,18 +1,37 @@
+# Flight Path Finder
+
+This project is a Java application that finds the shortest flight path between two airports. It uses data from CSV files to build a graph of airports and routes, and then applies a search algorithm to find the shortest path.
+
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-## Folder Structure
+### Prerequisites
 
-The workspace contains two folders by default, where:
+You need to have Java installed on your machine to run this application. You can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+### Installing
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Clone the repository to your local machine:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+```sh
+git clone https://github.com/omar-basheer/AeroNav2
+```
 
-## Dependency Management
+### Running the Application
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+The main entry point of the application is the `Main` class in the `src/Main.java` file. You can run the application in your IDE or from the command line with the following command:
+
+```sh
+javac src/*.java && java -cp src Main
+```
+
+This will run the application with the default input file (`tests/input.txt`) and write the output to `tests/output.txt`.
+
+### Built With
+
+Java
+
+### Authors
+Me
+

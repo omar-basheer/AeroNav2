@@ -1,5 +1,18 @@
+
+/**
+ * The Haversine class provides a method to calculate the distance between two points on the Earth's surface using the Haversine formula.
+ */
 public class Haversine {
 
+  /**
+   * Calculates the distance between two points on the Earth's surface using the Haversine formula.
+   *
+   * @param lat1 The latitude of the first point.
+   * @param lon1 The longitude of the first point.
+   * @param lat2 The latitude of the second point.
+   * @param lon2 The longitude of the second point.
+   * @return The distance between the two points in kilometers.
+   */
   public static double calculateHaversine(double lat1, double lon1, double lat2, double lon2){
     double dLat  = Math.toRadians(lat2 - lat1);
     double dLong = Math.toRadians(lon2 - lon1);
