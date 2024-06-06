@@ -36,7 +36,7 @@ public class Main {
 
     // Find all paths
     ArrayList<ArrayList<String>> flightPaths = Search.findAllPaths(inputs.get(0), inputs.get(1),
-        routeData.getFlightGraph(), 14, 2);
+        routeData.getFlightGraph(), 14, 20);
 
   
     ArrayList<PathData> formattedPaths = Search.formatPaths(flightPaths, airports.getAirports(), routeData.getRoutes(), airlines);

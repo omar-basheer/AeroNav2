@@ -1,0 +1,148 @@
+Shortest Path:
+1. DL from ACC to JFK
+2. AA from JFK to YYZ
+3. AC from YYZ to YWG
+Total flights: 3
+Total flight distance: 10314.10368061898 kilometers
+
+All Paths with Distance Information:
+Path:
+1. AA from ACC to LHR
+2. AA from LHR to DEN
+3. AC from DEN to YWG
+Total flights: 3
+Total flight distance: 13856.543154193796 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AA from LHR to LAS
+3. WS from LAS to YWG
+Total flights: 3
+Total flight distance: 15602.621275693506 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AA from LHR to ORD
+3. AC from ORD to YWG
+Total flights: 3
+Total flight distance: 12581.66870199425 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AA from LHR to YUL
+3. AC from YUL to YWG
+Total flights: 3
+Total flight distance: 12132.636337915099 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AA from LHR to YVR
+3. AC from YVR to YWG
+Total flights: 3
+Total flight distance: 14542.543398360376 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AA from LHR to YYC
+3. AC from YYC to YWG
+Total flights: 3
+Total flight distance: 13306.466251800846 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AA from LHR to YYZ
+3. AC from YYZ to YWG
+Total flights: 3
+Total flight distance: 12311.142350292977 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AC from LHR to YEG
+3. AC from YEG to YWG
+Total flights: 3
+Total flight distance: 13096.297149984346 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AC from LHR to YOW
+3. AC from YOW to YWG
+Total flights: 3
+Total flight distance: 12134.829932396497 kilometers
+
+Path:
+1. AA from ACC to LHR
+2. AF from LHR to MSP
+3. DL from MSP to YWG
+Total flights: 3
+Total flight distance: 12178.419516144606 kilometers
+
+Path:
+1. AT from ACC to CMN
+2. AT from CMN to YUL
+3. AC from YUL to YWG
+Total flights: 3
+Total flight distance: 10673.723393181164 kilometers
+
+Path:
+1. AZ from ACC to FCO
+2. AA from FCO to ORD
+3. AC from ORD to YWG
+Total flights: 3
+Total flight distance: 13087.464653247707 kilometers
+
+Path:
+1. AZ from ACC to FCO
+2. AC from FCO to YYZ
+3. AC from YYZ to YWG
+Total flights: 3
+Total flight distance: 12797.665003452232 kilometers
+
+Path:
+1. AZ from ACC to FCO
+2. TS from FCO to YUL
+3. AC from YUL to YWG
+Total flights: 3
+Total flight distance: 12610.773919060155 kilometers
+
+Path:
+1. DL from ACC to JFK
+2. AA from JFK to LAS
+3. WS from LAS to YWG
+Total flights: 3
+Total flight distance: 13938.312841443429 kilometers
+
+Path:
+1. DL from ACC to JFK
+2. AA from JFK to ORD
+3. AC from ORD to YWG
+Total flights: 3
+Total flight distance: 10547.172304838497 kilometers
+
+Path:
+1. DL from ACC to JFK
+2. AA from JFK to YUL
+3. AC from YUL to YWG
+Total flights: 3
+Total flight distance: 10577.021674216827 kilometers
+
+Path:
+1. DL from ACC to JFK
+2. AA from JFK to YYC
+3. AC from YYC to YWG
+Total flights: 3
+Total flight distance: 12690.04974378566 kilometers
+
+Path:
+1. DL from ACC to JFK
+2. AA from JFK to YYZ
+3. AC from YYZ to YWG
+Total flights: 3
+Total flight distance: 10314.10368061898 kilometers
+
+Path:
+1. DL from ACC to JFK
+2. B6 from JFK to DEN
+3. AC from DEN to YWG
+Total flights: 3
+Total flight distance: 12091.272354233191 kilometers
+
